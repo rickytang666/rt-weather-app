@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<style>
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+
+    tr:nth-child(even) {
+    background-color: #dddddd;
+    }
+</style>
+
+  <body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Weather Report</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <nav class="row" style="background: #337ab7; color: white;">
+    <h1 class="col-md-3 text-center">Weather</h1>
+  </nav> 
+  <br />
+  <br />
+  <center class="row">
+    <form method="post" class="col-md-6 col-md-offset-3">
+      <div class="input-group">
+        <input type="text" class="form-control" name="city" placeholder="Search">
+        <div class="input-group-btn">
+          <button class="btn btn-primary" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+        <form>
+  </center>
+  <table style="width:100%">
+    <tr> 
+      <th>City Name</th>
+      <th>Country Code</th>
+      <th>Coordinates</th> 
+      <th>Temperature(Celsius)</th> 
+      <th>Pressure</th> 
+      <th>Humidity</th> 
+      <th>Wind Speed</th>
+    </tr> 
+    <tr>
+      <td>{{data.cityname}}</td>
+      <td>{{data.country_code}}</td>
+      <td>{{data.coordinate}}</td> 
+      <td>{{data.temp_cel}}</td> 
+      <td>{{data.pressure}}</td> 
+      <td>{{data.humidity}}</td> 
+      <td>{{data.wind_speed}}</td>
+    </tr>
+  </table>
+</body>
+
+</html>
