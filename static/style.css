@@ -38,7 +38,7 @@ body {
 }
 
 .search-form {
-    background: rgb(163, 208, 255);
+    background-color: rgba(163, 208, 255, 0.2);
     width: 100%;
     max-width: 50%;
     padding: 30px;
@@ -49,6 +49,12 @@ body {
     justify-content: center;
     align-items: center;
     border: 1px solid #e5e7eb;
+}
+
+.search-form:focus-within {
+    background-color: rgba(163, 208, 255, 0.5);
+    transition: background-color 0.5s ease;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .search-form form {
@@ -104,7 +110,7 @@ body {
     padding: 12px 24px;
     font-size: 16px;
     background: linear-gradient(135deg, #3b82f6, #2563eb);
-    border: 2px solid #3b82f6; /* Match the input border style */
+    border: 2px solid #ffffff; /* Match the input border style */
     border-left: none; /* Remove left border to connect with input */
     transition: all 0.3s ease;
     height: 48px; /* Match input height */
@@ -117,15 +123,19 @@ body {
 }
 
 .search-btn:hover {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #c325eb, #bc1dd8);
+    box-shadow: 0 4px 12px rgba(237, 59, 246, 0.4);
     color: white;
 }
 
 .search-btn:focus {
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     color: white;
+}
+
+/* Add spacing between search icon and text */
+.search-btn .glyphicon {
+    margin-right: 8px;
 }
 
 .weather-table {
