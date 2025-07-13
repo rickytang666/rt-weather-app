@@ -1,77 +1,100 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<style>
-    table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    }
-
-    td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    }
-
-    tr:nth-child(even) {
-    background-color: #dddddd;
-    }
-</style>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Weather Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    
+    <!-- TikTok Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  </head>
 
   <body>
-
-<head>
-  <meta charset="utf-8">
-  <title>Weather Report</title>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-</head>
-
-<body>
-  <nav class="row" style="background: #337ab7; color: white;">
-    <h1 class="col-md-3 text-center">Weather</h1>
-  </nav> 
-  <br />
-  <br />
-  <center class="row">
-    <form method="post" class="col-md-6 col-md-offset-3">
-      <div class="input-group">
-        <input type="text" class="form-control" name="city" placeholder="Search">
-        <div class="input-group-btn">
-          <button class="btn btn-primary" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
+    <nav class="weather-nav">
+      <h1>Weather Report App</h1>
+    </nav> 
+    
+    <div class="container weather-container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="search-section">
+            <div class="search-form">
+              <form method="post">
+                <div class="input-group">
+                  <input type="text" class="form-control search-input" name="city" placeholder="Enter city name..." value="{{ request.form.city or '' }}">
+                  <button class="search-btn" type="submit">
+                    <i class="glyphicon glyphicon-search"></i> Search
+                  </button>
+                </div>
+              </form>
+            </div>
+            
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ 'danger' if category == 'error' else 'info' }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+          </div>
         </div>
-        <form>
-  </center>
-  <table style="width:100%">
-    <tr> 
-      <th>City Name</th>
-      <th>Country Code</th>
-      <th>Coordinates</th> 
-      <th>Temperature(Celsius)</th> 
-      <th>Pressure</th> 
-      <th>Humidity</th> 
-      <th>Wind Speed</th>
-    </tr> 
-    <tr>
-      <td>{{data.cityname}}</td>
-      <td>{{data.country_code}}</td>
-      <td>{{data.coordinate}}</td> 
-      <td>{{data.temp_cel}}</td> 
-      <td>{{data.pressure}}</td> 
-      <td>{{data.humidity}}</td> 
-      <td>{{data.wind_speed}}</td>
-    </tr>
-  </table>
-</body>
-
+      </div>
+      
+      {% if data %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="weather-table">
+            <table class="table">
+              <thead>
+                <tr> 
+                  <th>City Name</th>
+                  <th>Country Code</th>
+                  <th>Coordinates</th> 
+                  <th>Temperature</th> 
+                  <th>Pressure</th> 
+                  <th>Humidity</th> 
+                  <th>Wind Speed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ data.cityname }}</td>
+                  <td>{{ data.country_code }}</td>
+                  <td>{{ data.coordinate }}</td> 
+                  <td>{{ data.temp_cel }}</td> 
+                  <td>{{ data.pressure }}</td> 
+                  <td>{{ data.humidity }}</td> 
+                  <td>{{ data.wind_speed }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </body>
 </html>

@@ -128,6 +128,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# Replit
+.replit
+replit.nix
+
 # Spyder project settings
 .spyderproject
 .spyproject
